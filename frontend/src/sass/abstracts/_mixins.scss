@@ -1,0 +1,9 @@
+// frequently-used property
+
+$bp-large: 1200px;
+
+@mixin respondMax($breakpoint) {
+  @media only screen and (max-width: $breakpoint/16px*1em) {
+    @content;
+  }
+}
