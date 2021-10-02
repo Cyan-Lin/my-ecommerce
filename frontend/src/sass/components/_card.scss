@@ -1,0 +1,115 @@
+.card {
+  width: 100%;
+  background-color: var(--color-whtie);
+  cursor: pointer;
+
+  &:hover {
+    .card__img {
+      transform: scale(1.5);
+    }
+
+    .card__action-item {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &__img-box {
+    width: 100%;
+    height: 35rem;
+
+    overflow: hidden;
+    position: relative;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    transition: all 0.4s ease-in-out;
+    transform-origin: 20% 30%;
+  }
+
+  &__action {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+
+    &-item {
+      width: 3.5rem;
+      height: 3.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--color-whtie);
+      margin: 4px;
+      position: relative;
+
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+
+      &:hover {
+        .card__action-text {
+          opacity: 1;
+          transform: translate(0, -50%);
+        }
+      }
+    }
+
+    &-text {
+      position: absolute;
+      right: 5rem;
+      top: 50%;
+      transform: translate(-2rem, -50%);
+      white-space: nowrap;
+      background-color: var(--color-whtie);
+      padding: 4px 8px;
+      border-radius: 3px;
+      pointer-events: none;
+
+      opacity: 0;
+      transition: all 0.3s;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -4px;
+        width: 8px;
+        height: 8px;
+        background-color: var(--color-whtie);
+        transform: translateY(-50%) rotate(45deg);
+      }
+    }
+  }
+
+  &__content {
+    padding: 1rem;
+  }
+
+  &__name {
+    font-size: 1.6rem;
+    font-weight: 400;
+  }
+
+  &__price-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__price {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--color-orange);
+  }
+
+  &__rating {
+    color: var(--color-orange-light);
+  }
+}

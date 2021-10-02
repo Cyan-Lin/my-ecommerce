@@ -4,8 +4,16 @@
 @import 'sass/base/animations';
 @import 'sass/base/base';
 @import 'sass/base/utilities';
+@import 'sass/base/typography';
 
-// @import 'sass/components/';
+@import 'sass/components/card';
+@import 'sass/components/button';
 
 @import 'sass/layout/footer';
 @import 'sass/layout/navigation';
+@import 'sass/layout/content';
+
+@import 'sass/pages/productList';
+@import 'sass/pages/productView';
+@import 'sass/pages/shoppingCart';
+@import 'sass/pages/transactionHistory';

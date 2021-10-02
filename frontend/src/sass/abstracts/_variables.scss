@@ -2,12 +2,29 @@
 
 :root {
   --color-grey-light-1: #f8f9fa;
+  --color-grey-light-1-transparent: rgba(248, 249, 250, 0.95);
   --color-grey-light-2: #e9ecef;
   --color-grey-light-3: #ced4da;
   --color-grey-light-4: #adb5bd;
+  --color-grey-soft: #eeeeee;
 
   --color-grey-dark-1: #212529;
   --color-grey-dark-2: #343a40;
   --color-grey-dark-3: #495057;
   --color-grey-dark-4: #6c757d;
+
+  --color-whtie: #fff;
+  --color-orange: #ff7730;
+  --color-orange-light: #f79d65;
+  --color-green-dark-1: #208b3a;
+  --color-green-dark-2: #25a244;
+
+  --shadow-light: 0 2rem 4rem rgba(0, 0, 0, 0.05);
+
+  --border-bottom: 1px solid var(--color-grey-light-3);
+
+  --smallest: 1rem;
+  --smaller: 2rem;
+  --medium: 4rem;
+  --large: 8rem;
 }

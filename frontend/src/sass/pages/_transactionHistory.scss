@@ -1,0 +1,56 @@
+.transaction-history {
+}
+
+.history {
+  &__list {
+    background-color: var(--color-whtie);
+    padding: 4rem 4rem;
+  }
+
+  &__item {
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 1rem 2rem;
+    border-bottom: var(--border-bottom);
+  }
+
+  &__img-box {
+    width: 12rem;
+    height: 15rem;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__product-name {
+    font-size: 2.2rem;
+    font-weight: 300;
+    margin-left: var(--medium);
+    color: var(--color-grey-dark-1);
+  }
+
+  &__qty-price {
+    text-align: center;
+    margin-left: auto;
+    color: var(--color-grey-dark-4);
+  }
+
+  &__product-qty {
+    font-size: 1.8rem;
+    margin-bottom: var(--smallest);
+  }
+
+  &__product-price {
+    font-size: 1.8rem;
+  }
+
+  &__date {
+    margin-left: var(--medium);
+    color: var(--color-grey-dark-4);
+  }
+}

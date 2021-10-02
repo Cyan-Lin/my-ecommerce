@@ -1,0 +1,47 @@
+.btn {
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.6rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &--absolute {
+    width: 100%;
+    height: 100%;
+  }
+
+  &--calc {
+    font-size: 2rem;
+    color: var(--color-grey-dark-3);
+
+    &:hover {
+      color: var(--color-grey-dark-1);
+    }
+  }
+
+  &--rectangle {
+    display: inline-block;
+    padding: 1.5rem 3rem;
+    width: 100%;
+    background-color: var(--color-green-dark-1);
+    border-radius: 3px;
+    color: var(--color-whtie);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+
+    &:hover {
+      background-color: var(--color-green-dark-2);
+    }
+  }
+
+  &--delete {
+    font-size: 2rem;
+    color: var(--color-grey-dark-3);
+
+    &:hover {
+      color: var(--color-grey-dark-1);
+    }
+  }
+}
