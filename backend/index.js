@@ -27,7 +27,7 @@ app.use('/auth', authRoutes);
 app.use('/api/products', productRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('frontend/build'));
+  app.use(express.static('../frontend/build'));
 
   const path = require('path');
   app.get('*', (req, res) => {
