@@ -26,16 +26,23 @@ app.use(passport.session());
 app.use('/auth', authRoutes);
 app.use('/api/products', productRoutes);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('../frontend/build'));
+console.log(__dirname);
 
+if (process.env.NODE_ENV === 'production') {
   const path = require('path');
+
+  app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+
   app.get('*', (req, res) => {
     // __dirname 從此(index.js)資料夾 (可以省略不寫)
     // '..'從此資料夾往上一層
-    res.sendFile(path.resolve('..', 'frontend', 'build', 'index.html'));
+    res.sendFile(
+      path.resolve(__dirname, '..', 'frontend', 'build', 'index.html')
+    );
   });
 }
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server running on port ${PORT} ${__dirname}`)
+);
