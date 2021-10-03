@@ -27,10 +27,10 @@ app.use('/auth', authRoutes);
 app.use('/api/products', productRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('../frontend/build'));
+  app.use(express.static('frontend/build'));
 
   const path = require('path');
-  app.get('/*', (req, res) => {
+  app.get('*', (req, res) => {
     // __dirname 從此(index.js)資料夾 (可以省略不寫)
     // '..'從此資料夾往上一層
     res.sendFile(path.resolve('..', 'frontend', 'build', 'index.html'));
