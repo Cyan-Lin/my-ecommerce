@@ -31,7 +31,7 @@ console.log(__dirname);
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
 
-  app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+  app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
 
   app.get('*', (req, res) => {
     // __dirname 從此(index.js)資料夾 (可以省略不寫)
