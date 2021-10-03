@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import ProductCard from './ProductCard';
 
 const ProductList = ({ products }) => {
-  console.log(products);
-
   const renderProductCard = () => {
     return products.map(product => (
       <ProductCard key={product._id} product={product} />

@@ -3,12 +3,12 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Navigation from './Navigation';
-import ProductList from './ProductList';
+import ProductList from './products/ProductList';
 import Landing from './Landing';
-import ShoppingCart from './ShoppingCart';
-import ProductView from './ProductView';
-import TransactionHistory from './TransactionHistory';
-import Wishlist from './Wishlist';
+import ShoppingCart from './cart/ShoppingCart';
+import ProductView from './products/ProductView';
+import TransactionHistory from './history/TransactionHistory';
+import Wishlist from './wishlist/Wishlist';
 
 import { fetchUser, fetchProducts } from '../actions';
 

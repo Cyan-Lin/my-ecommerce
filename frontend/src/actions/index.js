@@ -7,6 +7,8 @@ import {
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   EDIT_PRODUCT_IN_CART,
+  ADD_PRODUCT_TO_WISHLIST,
+  REMOVE_PRODUCT_FROM_WISHLIST,
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -45,5 +47,19 @@ export const editProductInCart = (id, amount) => {
   return {
     type: EDIT_PRODUCT_IN_CART,
     payload: { id, amount },
+  };
+};
+
+export const addProductToWishlist = product => {
+  return {
+    type: ADD_PRODUCT_TO_WISHLIST,
+    payload: product,
+  };
+};
+
+export const removeProductFromWishlist = id => {
+  return {
+    type: REMOVE_PRODUCT_FROM_WISHLIST,
+    payload: id,
   };
 };

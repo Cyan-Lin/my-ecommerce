@@ -9,11 +9,13 @@ router.get(
   })
 );
 
-router.get('/google/callback', passport.authenticate('google'));
+router.get('/google/callback', passport.authenticate('google'), (req, res) => {
+  res.redirect('/products');
+});
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.send(req.user);
+  res.redirect('/');
 });
 
 router.get('/current_user', (req, res) => {

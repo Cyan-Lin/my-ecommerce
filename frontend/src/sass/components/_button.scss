@@ -12,12 +12,23 @@
     height: 100%;
   }
 
+  &--heart {
+    &:hover,
+    &.active {
+      color: var(--color-orange);
+    }
+  }
+
   &--calc {
     font-size: 2rem;
     color: var(--color-grey-dark-3);
 
     &:hover {
       color: var(--color-grey-dark-1);
+    }
+
+    &.disable {
+      color: var(--color-grey-light-4);
     }
   }
 
@@ -33,6 +44,20 @@
 
     &:hover {
       background-color: var(--color-green-dark-2);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+
+    &.disable {
+      color: var(--color-grey-light-3);
+      background-color: var(--color-grey-dark-4);
+
+      &:hover {
+        transform: none;
+      }
     }
   }
 

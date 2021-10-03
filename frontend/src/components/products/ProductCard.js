@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
+
 import { useHistory } from 'react-router-dom';
 
-const ProductCard = ({
-  product: { imageUrl, name, price, description, countInStock, _id },
-}) => {
+import { addProductToWishlist } from '../../actions';
+
+const ProductCard = ({ product, addProductToWishlist, wishItem }) => {
+  const { imageUrl, name, price, _id } = product;
   const history = useHistory();
+
+  const actionItemRef = useRef(null);
+
+  useEffect(() => {
+    if (actionItemRef.current) {
+      if (!wishItem) {
+        actionItemRef.current.classList.remove('active');
+        actionItemRef.current
+          .querySelector('.btn--heart')
+          .classList.remove('active');
+      } else {
+        actionItemRef.current.classList.add('active');
+        actionItemRef.current
+          .querySelector('.btn--heart')
+          .classList.add('active');
+      }
+    }
+  }, [wishItem]);
 
   const onCardClick = () => {
     history.push(`/products/${_id}`);
@@ -12,10 +33,9 @@ const ProductCard = ({
 
   const onWishlistIconClick = e => {
     e.stopPropagation();
-  };
-
-  const onAddToCartClick = e => {
-    e.stopPropagation();
+    if (!wishItem) {
+      addProductToWishlist(product);
+    }
   };
 
   return (
@@ -23,18 +43,21 @@ const ProductCard = ({
       <div className="card__img-box">
         <img src={imageUrl} alt="product pic" className="card__img" />
         <div className="card__action">
-          <div className="card__action-item">
-            <button onClick={onWishlistIconClick} className="btn btn--absolute">
+          <div ref={actionItemRef} className="card__action-item">
+            <button
+              onClick={onWishlistIconClick}
+              className="btn btn--absolute btn--heart"
+            >
               <i className="fas fa-heart"></i>
               <span className="card__action-text">Add to Wishlist</span>
             </button>
           </div>
-          <div className="card__action-item">
+          {/* <div className="card__action-item">
             <button onClick={onAddToCartClick} className="btn btn--absolute">
               <i className="fas fa-shopping-cart"></i>
               <span className="card__action-text">Add to Cart</span>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="card__content">
@@ -54,4 +77,8 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;
+const mapStateToProps = (state, ownProps) => {
+  return { wishItem: state.wishlist[ownProps.product._id] };
+};
+
+export default connect(mapStateToProps, { addProductToWishlist })(ProductCard);

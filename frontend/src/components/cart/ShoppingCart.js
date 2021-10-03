@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import CartItem from './CartItem';
 
-const ShoppingCart = ({ cart }) => {
+const ShoppingCart = ({ cart, itemAmount, orderTotal }) => {
+  console.log(itemAmount, orderTotal);
   const renderCartItems = () => {
     return cart.map(item => <CartItem key={item._id} product={item} />);
   };
@@ -20,10 +21,10 @@ const ShoppingCart = ({ cart }) => {
         </ul>
         <div className="cart__action">
           <div className="cart__total-item">
-            Items<span>4</span>
+            Items<span>{itemAmount}</span>
           </div>
           <div className="cart__total-order">
-            Order Total<span>NT$6,986.73</span>
+            Order Total<span>NT${orderTotal.toFixed(2)}</span>
           </div>
           <button className="btn btn--rectangle">Checkout</button>
         </div>
@@ -33,7 +34,17 @@ const ShoppingCart = ({ cart }) => {
 };
 
 const mapStateToProps = state => {
-  return { cart: Object.values(state.cart) };
+  return {
+    cart: Object.values(state.cart),
+    itemAmount: Object.values(state.cart).reduce(
+      (sum, currentItem) => (sum += currentItem.amount),
+      0
+    ),
+    orderTotal: Object.values(state.cart).reduce(
+      (sum, currentItem) => (sum += currentItem.amount * currentItem.price),
+      0
+    ),
+  };
 };
 
 export default connect(mapStateToProps)(ShoppingCart);

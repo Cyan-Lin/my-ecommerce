@@ -44,9 +44,15 @@
     padding-bottom: var(--smaller);
   }
 
+  &__rating {
+    color: var(--color-orange-light);
+    font-size: 1.6rem;
+  }
+
   &__price {
     font-size: 1.8rem;
     font-weight: 300;
+    margin-bottom: var(--smallest);
   }
 
   &__detail {

@@ -31,7 +31,9 @@ if (process.env.NODE_ENV === 'production') {
 
   const path = require('path');
   app.get('/*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    // __dirname 從此(index.js)資料夾 (可以省略不寫)
+    // '..'從此資料夾往上一層
+    res.sendFile(path.resolve('..', 'frontend', 'build', 'index.html'));
   });
 }
 

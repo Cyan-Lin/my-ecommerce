@@ -11,7 +11,9 @@ const Navigation = ({ location, auth }) => {
   // execpt logo link
   const navLinks = navRef.current?.querySelectorAll('.navigation__link');
 
+  // trigger this everytime on pathname changing
   useEffect(() => {
+    window.scrollTo(0, 0);
     navLinks?.forEach(navLink => {
       navLink.classList.remove('active');
       // add border-bottom
@@ -41,7 +43,7 @@ const Navigation = ({ location, auth }) => {
       i: 'fas fa-history',
       tabName: 'History',
     },
-    { link: '/wishlist', active: '', i: 'fas fa-heart', tabName: 'Favorite' },
+    { link: '/wishlist', active: '', i: 'fas fa-heart', tabName: 'Wishlist' },
     {
       link: '/shopping_cart',
       active: '',
