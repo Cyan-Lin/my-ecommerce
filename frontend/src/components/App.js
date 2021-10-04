@@ -9,6 +9,7 @@ import ShoppingCart from './cart/ShoppingCart';
 import ProductView from './products/ProductView';
 import TransactionHistory from './history/TransactionHistory';
 import Wishlist from './wishlist/Wishlist';
+import Checkout from './checkout/Checkout';
 
 import { fetchUser, fetchProducts } from '../actions';
 
@@ -34,6 +35,7 @@ const App = ({ fetchUser, fetchProducts }) => {
               component={TransactionHistory}
             />
             <Route exact path="/wishlist" component={Wishlist} />
+            <Route exact path="/checkout" component={Checkout} />
           </div>
         </>
       </BrowserRouter>

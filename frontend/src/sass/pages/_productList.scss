@@ -8,4 +8,8 @@
   /* grid-gap: <grid-row-gap> <grid-column-gap>; */
   grid-gap: 2rem;
   padding: 2rem 0;
+
+  // @include respondMax($bp-smaller) {
+  //   width: 80%;
+  // }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import CartItem from './CartItem';
 
@@ -10,15 +11,10 @@ const ShoppingCart = ({ cart, itemAmount, orderTotal }) => {
   };
 
   return (
-    <>
+    <div className="shopping-cart">
       <h2 className="heading-secondary">Shopping Cart</h2>
-      <div className="shopping-cart">
-        <ul className="cart__list">
-          {renderCartItems()}
-          {/* <CartItem />
-          <CartItem />
-          <CartItem /> */}
-        </ul>
+      <div className="cart">
+        <ul className="cart__list">{renderCartItems()}</ul>
         <div className="cart__action">
           <div className="cart__total-item">
             Items<span>{itemAmount}</span>
@@ -26,10 +22,12 @@ const ShoppingCart = ({ cart, itemAmount, orderTotal }) => {
           <div className="cart__total-order">
             Order Total<span>NT${orderTotal.toFixed(2)}</span>
           </div>
-          <button className="btn btn--rectangle">Checkout</button>
+          <Link to="/checkout" className="btn btn--rectangle btn--green">
+            Checkout
+          </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

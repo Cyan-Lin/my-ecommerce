@@ -98,6 +98,10 @@
 
   &__content {
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 10rem;
   }
 
   &__name {

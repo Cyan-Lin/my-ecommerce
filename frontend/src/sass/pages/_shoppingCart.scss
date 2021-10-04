@@ -1,8 +1,17 @@
 .shopping-cart {
-  display: flex;
+  @include respondMax($bp-medium) {
+    width: 80%;
+    margin: 0 auto;
+  }
 }
 
 .cart {
+  display: flex;
+
+  @include respondMax($bp-medium) {
+    flex-direction: column;
+  }
+
   &__list {
     flex: 0 0 65%;
     background-color: var(--color-whtie);
@@ -10,12 +19,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @include respondMax($bp-medium) {
+      padding: var(--smaller) var(--medium);
+      margin-bottom: var(--medium);
+    }
+
+    @include respondMax($bp-smaller) {
+      padding: var(--smaller) 0;
+    }
   }
 
   &__item {
     list-style: none;
-    padding: 2rem 0;
-    width: 80%;
+    padding: var(--smaller) 0;
+    width: 85%;
     display: flex;
     border-bottom: var(--border-bottom);
   }
@@ -44,6 +62,7 @@
   &__product-price {
     font-size: 1.4rem;
     font-weight: 300;
+    letter-spacing: 1px;
   }
 
   &__product-action {
@@ -63,12 +82,23 @@
   &__action {
     flex: 0 0 30%;
     margin-left: 5%;
-    padding: 2rem 3rem;
+    padding: var(--smaller) var(--medium);
     align-self: flex-start;
     background-color: var(--color-grey-light-2);
+    text-align: center;
 
     position: sticky;
     top: 8rem;
+
+    @include respondMax($bp-large) {
+      margin-left: 3%;
+      padding: var(--smaller) var(--smaller);
+    }
+
+    @include respondMax($bp-medium) {
+      margin-left: unset;
+      align-self: unset;
+    }
   }
 
   &__total-item {

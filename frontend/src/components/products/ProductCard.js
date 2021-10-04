@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-import { addProductToWishlist } from '../../actions';
+import { addProductToWishlist, removeProductFromWishlist } from '../../actions';
 
-const ProductCard = ({ product, addProductToWishlist, wishItem }) => {
+const ProductCard = ({
+  product,
+  addProductToWishlist,
+  removeProductFromWishlist,
+  wishItem,
+}) => {
   const { imageUrl, name, price, _id } = product;
   const history = useHistory();
 
@@ -34,8 +39,10 @@ const ProductCard = ({ product, addProductToWishlist, wishItem }) => {
   const onWishlistIconClick = e => {
     e.stopPropagation();
     if (!wishItem) {
-      addProductToWishlist(product);
+      return addProductToWishlist(product);
     }
+
+    removeProductFromWishlist(_id);
   };
 
   return (
@@ -81,4 +88,7 @@ const mapStateToProps = (state, ownProps) => {
   return { wishItem: state.wishlist[ownProps.product._id] };
 };
 
-export default connect(mapStateToProps, { addProductToWishlist })(ProductCard);
+export default connect(mapStateToProps, {
+  addProductToWishlist,
+  removeProductFromWishlist,
+})(ProductCard);

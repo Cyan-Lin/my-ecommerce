@@ -1,0 +1,8 @@
+.checkout {
+  display: flex;
+
+  @include respondMax($bp-medium) {
+    flex-direction: column;
+    align-items: center;
+  }
+}

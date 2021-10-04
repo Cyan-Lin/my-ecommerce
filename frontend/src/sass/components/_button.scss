@@ -1,11 +1,18 @@
 .btn {
-  font-family: inherit;
-  color: inherit;
-  font-size: 1.6rem;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  transition: all 0.3s;
+  &,
+  &:link,
+  &:visited {
+    font-family: inherit;
+    // color: inherit;
+    // font-size: 1.6rem;
+    border: none;
+    // background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    // anchor tag
+    text-decoration: none;
+  }
 
   &--absolute {
     width: 100%;
@@ -13,6 +20,8 @@
   }
 
   &--heart {
+    background-color: transparent;
+
     &:hover,
     &.active {
       color: var(--color-orange);
@@ -22,6 +31,7 @@
   &--calc {
     font-size: 2rem;
     color: var(--color-grey-dark-3);
+    background-color: transparent;
 
     &:hover {
       color: var(--color-grey-dark-1);
@@ -34,16 +44,24 @@
 
   &--rectangle {
     display: inline-block;
-    padding: 1.5rem 3rem;
-    width: 100%;
-    background-color: var(--color-green-dark-1);
+    padding: 1.5rem 5rem;
     border-radius: 3px;
     color: var(--color-whtie);
     font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
+    text-align: center;
+
+    @include respondMax($bp-large) {
+      padding: var(--smallest) var(--medium);
+    }
+
+    @include respondMax($bp-smaller) {
+      padding: var(--smallest) var(--smaller);
+    }
 
     &:hover {
-      background-color: var(--color-green-dark-2);
       transform: translateY(-2px);
     }
 
@@ -64,9 +82,26 @@
   &--delete {
     font-size: 2rem;
     color: var(--color-grey-dark-3);
+    background-color: transparent;
 
     &:hover {
       color: var(--color-grey-dark-1);
+    }
+  }
+
+  &--green {
+    background-color: var(--color-green-dark-1);
+
+    &:hover {
+      background-color: var(--color-green-dark-2);
+    }
+  }
+
+  &--orange {
+    background-color: var(--color-orange);
+
+    &:hover {
+      background-color: var(--color-orange-light);
     }
   }
 }

@@ -2,6 +2,10 @@
 }
 
 .content {
-  width: 120rem;
-  margin: 4rem auto;
+  max-width: 120rem;
+  margin: var(--medium) auto;
+
+  @include respondMax($bp-large) {
+    padding: 0 var(--smaller);
+  }
 }

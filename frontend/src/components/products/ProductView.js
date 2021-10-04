@@ -5,6 +5,7 @@ import {
   fetchProduct,
   addProductToCart,
   addProductToWishlist,
+  removeProductFromWishlist,
 } from '../../actions';
 
 const ProductView = ({
@@ -13,6 +14,7 @@ const ProductView = ({
   product,
   addProductToCart,
   addProductToWishlist,
+  removeProductFromWishlist,
   wishItem,
   cartItem,
 }) => {
@@ -68,8 +70,10 @@ const ProductView = ({
 
   const onWishlistIconClick = () => {
     if (!wishItem) {
-      addProductToWishlist(product);
+      return addProductToWishlist(product);
     }
+
+    removeProductFromWishlist(product._id);
   };
 
   const onMinusClick = () => {
@@ -149,7 +153,7 @@ const ProductView = ({
               <button
                 ref={addToCartRef}
                 onClick={onAddProductToCartClick}
-                className="btn btn--rectangle"
+                className="btn btn--rectangle btn--green"
               >
                 Add to Cart
               </button>
@@ -176,4 +180,5 @@ export default connect(mapStateToProps, {
   fetchProduct,
   addProductToCart,
   addProductToWishlist,
+  removeProductFromWishlist,
 })(ProductView);

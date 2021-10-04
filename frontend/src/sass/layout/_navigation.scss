@@ -2,9 +2,9 @@
   position: sticky;
   top: 0;
   left: 0;
-  width: 90%;
   height: 7rem;
-  margin-left: 5%;
+  width: 92%;
+  margin-left: 4%;
   padding: 0.5rem 1.5rem;
   display: flex;
   align-items: center;
@@ -12,6 +12,11 @@
   border-radius: 3px;
   z-index: 100;
   background-color: var(--color-grey-light-1-transparent);
+
+  @include respondMax($bp-large) {
+    width: 100%;
+    margin-left: 0;
+  }
 
   &__logo-box {
     height: 100%;
@@ -41,8 +46,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 6rem;
-    height: 6rem;
+    width: 7rem;
+    height: 7rem;
     cursor: pointer;
     display: flex;
     align-items: center;

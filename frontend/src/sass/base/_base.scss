@@ -11,9 +11,17 @@
 
 html {
   box-sizing: border-box;
+  // 10px
   font-size: 62.5%;
 
   @include respondMax($bp-large) {
+    // 9px
+    font-size: 56.25%;
+  }
+
+  @include respondMax($bp-medium) {
+    // 8px
+    font-size: 50%;
   }
 }
 

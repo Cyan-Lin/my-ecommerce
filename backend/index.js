@@ -31,11 +31,13 @@ console.log(__dirname);
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
 
+  // path.join(第一個參數會算在內), 預設不包含此檔案的路徑, 所以第一個參數就需要__dirname
   app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
 
   app.get('*', (req, res) => {
-    // __dirname 從此(index.js)資料夾 (可以省略不寫)
+    // __dirname => 從此(index.js)資料夾
     // '..'從此資料夾往上一層
+    // path.resolve(第一個參數不重要 會被省略,), 預設就是包含此檔案的路徑/backend
     res.sendFile(
       path.resolve(__dirname, '..', 'frontend', 'build', 'index.html')
     );

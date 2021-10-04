@@ -1,0 +1,230 @@
+.checkout-form {
+  flex: 0 0 60%;
+  background-color: var(--color-whtie);
+  padding: var(--medium) var(--large);
+  max-width: 65rem;
+
+  @include respondMax($bp-large) {
+    padding: var(--smaller) var(--large);
+  }
+
+  @include respondMax($bp-medium) {
+    padding: var(--smaller) var(--medium);
+    // max-width: 60rem;
+    order: 1;
+  }
+
+  @include respondMax($bp-smaller) {
+    padding: var(--smaller) var(--smaller);
+    width: 90%;
+  }
+}
+
+.form {
+  &__content {
+    // width: 100%;
+    margin-bottom: var(--medium);
+  }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    // width: 100%;
+    margin-bottom: var(--smaller);
+
+    @include respondMax($bp-smaller) {
+      flex-direction: column;
+    }
+  }
+
+  &__label {
+    display: inline-block;
+    width: 20rem;
+    font-size: 1.5rem;
+    flex: 0 0 35%;
+
+    @include respondMax($bp-smaller) {
+      width: 100%;
+    }
+  }
+
+  &__input {
+    display: inline-block;
+    flex: 0 0 65%;
+    font-size: 1.5rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 0.8rem 1.2rem;
+    border-radius: 3px;
+    background-color: var(--color-grey-light-1);
+    border: 2px solid transparent;
+    transition: all 0.3s;
+
+    @include respondMax($bp-smaller) {
+      width: 100%;
+    }
+
+    &:focus {
+      outline: none;
+      border: 2px solid var(--color-grey-dark-4);
+      box-shadow: var(--shadow-lighter);
+    }
+  }
+
+  &__action {
+    display: flex;
+    justify-content: space-around;
+
+    @include respondMax($bp-large) {
+      justify-content: space-between;
+    }
+  }
+}
+
+// cart in checkout
+.checkout-cart {
+  flex: 0 0 30%;
+  margin-left: 5%;
+  margin-top: var(--medium);
+  align-self: flex-start;
+  position: relative;
+
+  @include respondMax($bp-large) {
+    flex: 0 0 35%;
+    margin-left: 3%;
+    margin-top: var(--smaller);
+  }
+
+  @include respondMax($bp-medium) {
+    align-self: unset;
+    margin-top: unset;
+    margin-left: unset;
+    margin-bottom: var(--smaller);
+  }
+
+  &__toggle {
+    position: absolute;
+    top: 1.5rem;
+    right: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: none;
+
+    @include respondMax($bp-medium) {
+      display: block;
+    }
+
+    &.active {
+      &::before {
+        display: none;
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      color: inherit;
+      background-color: var(--color-grey-dark-2);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
+      height: 2px;
+      color: inherit;
+      background-color: var(--color-grey-dark-2);
+    }
+  }
+
+  &__box {
+    transition: all 0.3s;
+    @include respondMax($bp-medium) {
+      max-height: 0;
+      opacity: 0;
+
+      &.active {
+        max-height: 50rem;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__list {
+    padding: 0 var(--smaller);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--smaller);
+  }
+
+  &__item {
+    list-style: none;
+    padding: var(--smallest) 0;
+    width: 100%;
+    display: flex;
+    border-bottom: var(--border-bottom);
+  }
+
+  &__img-box {
+    width: 10rem;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__product-box {
+    margin-left: var(--smallest);
+    flex: 1;
+  }
+
+  &__product-name {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--smallest);
+  }
+
+  &__product-price {
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+
+  &__product-amount {
+    font-size: 1.3rem;
+    font-weight: 400;
+
+    & span {
+      margin: 0 var(--smallest);
+    }
+  }
+
+  &__action {
+    padding: 0 var(--smaller);
+  }
+
+  &__total-item {
+    font-size: 1.8rem;
+    font-weight: 300;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--smaller);
+  }
+
+  &__total-order {
+    font-size: 2rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}

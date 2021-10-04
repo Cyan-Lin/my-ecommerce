@@ -1,12 +1,25 @@
 .product-view {
   display: flex;
   justify-content: center;
+
+  @include respondMax($bp-small) {
+    flex-direction: column;
+    // align-items: center;
+  }
 }
 
 .view {
   &__img-box {
     flex: 0 0 50%;
     height: 75rem;
+
+    @include respondMax($bp-large) {
+      flex: 0 0 60%;
+    }
+
+    @include respondMax($bp-medium) {
+      flex: 0 0 55%;
+    }
   }
 
   &__img {
@@ -19,11 +32,21 @@
 
   &__info-action {
     flex: 0 0 35%;
-    padding: 1rem 3rem;
+    padding: var(--smallest) var(--smaller);
 
     align-self: flex-start;
     position: sticky;
     top: 8rem;
+
+    @include respondMax($bp-large) {
+      flex: 0 0 40%;
+    }
+
+    @include respondMax($bp-medium) {
+      flex-direction: column;
+      align-items: center;
+      flex: 0 0 45%;
+    }
   }
   //
 
@@ -72,6 +95,10 @@
 
   &__add-to-cart {
     display: flex;
+
+    @include respondMax($bp-small) {
+      justify-content: center;
+    }
   }
 
   &__qty-controller {

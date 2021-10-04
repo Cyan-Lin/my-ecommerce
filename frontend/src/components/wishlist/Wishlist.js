@@ -7,7 +7,7 @@ const Wishlist = ({ wishlist }) => {
   const renderWishList = () => {
     console.log(wishlist);
 
-    return wishlist.map(item => <ProductCard product={item} />);
+    return wishlist.map(item => <ProductCard key={item._id} product={item} />);
   };
 
   return (
