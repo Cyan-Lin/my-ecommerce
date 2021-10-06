@@ -6,6 +6,7 @@ const passport = require('passport');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 require('./config/passport');
 
 connectDB();
@@ -25,6 +26,7 @@ app.use(passport.session());
 
 app.use('/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
 
 console.log(__dirname);
 

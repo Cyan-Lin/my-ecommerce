@@ -40,10 +40,11 @@
 
     @include respondMax($bp-large) {
       flex: 0 0 40%;
+      padding: var(--smallest);
+      padding-left: var(--smaller);
     }
 
     @include respondMax($bp-medium) {
-      flex-direction: column;
       align-items: center;
       flex: 0 0 45%;
     }
@@ -95,9 +96,10 @@
 
   &__add-to-cart {
     display: flex;
+    justify-content: center;
 
-    @include respondMax($bp-small) {
-      justify-content: center;
+    @include respondMax($bp-smallest) {
+      justify-content: space-around;
     }
   }
 
@@ -106,6 +108,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @include respondMax($bp-medium) {
+      flex: 0 0 35%;
+    }
 
     span {
       margin: 0 var(--smaller);

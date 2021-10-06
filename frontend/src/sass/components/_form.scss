@@ -1,5 +1,8 @@
 .checkout-form {
   flex: 0 0 60%;
+  align-self: flex-start;
+  position: sticky;
+  top: 8rem;
   background-color: var(--color-whtie);
   padding: var(--medium) var(--large);
   max-width: 65rem;
@@ -10,8 +13,8 @@
 
   @include respondMax($bp-medium) {
     padding: var(--smaller) var(--medium);
-    // max-width: 60rem;
     order: 1;
+    align-self: center;
   }
 
   @include respondMax($bp-smaller) {
@@ -30,7 +33,8 @@
     display: flex;
     align-items: center;
     // width: 100%;
-    margin-bottom: var(--smaller);
+    margin-bottom: var(--medium);
+    position: relative;
 
     @include respondMax($bp-smaller) {
       flex-direction: column;
@@ -69,6 +73,42 @@
       border: 2px solid var(--color-grey-dark-4);
       box-shadow: var(--shadow-lighter);
     }
+
+    &--review {
+      background-color: var(--color-grey-light-3);
+    }
+
+    &--invalid {
+      border: 2px solid var(--color-orange);
+    }
+  }
+
+  &__error-text {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    color: var(--color-orange);
+    pointer-events: none;
+
+    @include respondMax($bp-medium) {
+      right: 1rem;
+    }
+
+    @include respondMax($bp-small) {
+      top: unset;
+      bottom: 0;
+      transform: translateY(-30%);
+    }
+
+    @include respondMax($bp-smallest) {
+      top: unset;
+      bottom: -3rem;
+      transform: translateY(0);
+      width: 120%;
+      text-align: right;
+      right: 0;
+    }
   }
 
   &__action {
@@ -96,10 +136,15 @@
   }
 
   @include respondMax($bp-medium) {
-    align-self: unset;
+    align-self: center;
+    width: 38rem;
     margin-top: unset;
     margin-left: unset;
     margin-bottom: var(--smaller);
+  }
+
+  @include respondMax($bp-smaller) {
+    width: 90%;
   }
 
   &__toggle {
@@ -147,12 +192,14 @@
 
   &__box {
     transition: all 0.3s;
+    overflow: hidden;
+
     @include respondMax($bp-medium) {
       max-height: 0;
       opacity: 0;
 
       &.active {
-        max-height: 50rem;
+        max-height: 200rem;
         opacity: 1;
       }
     }

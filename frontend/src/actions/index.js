@@ -9,6 +9,7 @@ import {
   EDIT_PRODUCT_IN_CART,
   ADD_PRODUCT_TO_WISHLIST,
   REMOVE_PRODUCT_FROM_WISHLIST,
+  FETCH_ORDERS,
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -62,4 +63,30 @@ export const removeProductFromWishlist = id => {
     type: REMOVE_PRODUCT_FROM_WISHLIST,
     payload: id,
   };
+};
+
+export const submitOrder = (values, products, history) => async dispatch => {
+  const orderedProducts = products.map(
+    ({ _id, name, price, imageUrl, amount }) => ({
+      _id,
+      name,
+      price,
+      imageUrl,
+      amount,
+    })
+  );
+
+  const { data } = await axios.post('api/products', {
+    values,
+    orderedProducts,
+  });
+  history.push('/products');
+  console.log(data);
+  // dispatch({ type: FETCH_USER, payload: data });
+};
+
+export const fetchOrders = () => async dispatch => {
+  const { data } = await axios.get('/api/orders');
+
+  return dispatch({ type: FETCH_ORDERS, payload: data });
 };

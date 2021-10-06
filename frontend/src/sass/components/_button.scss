@@ -22,7 +22,12 @@
   &--heart {
     background-color: transparent;
 
-    &:hover,
+    @media screen and(hover:hover) {
+      &:hover {
+        color: var(--color-orange);
+      }
+    }
+
     &.active {
       color: var(--color-orange);
     }
@@ -32,6 +37,10 @@
     font-size: 2rem;
     color: var(--color-grey-dark-3);
     background-color: transparent;
+
+    // @include respondMax($bp-smallest) {
+    //   padding: var(--smallest);
+    // }
 
     &:hover {
       color: var(--color-grey-dark-1);
@@ -52,12 +61,17 @@
     letter-spacing: 0.8px;
     text-transform: uppercase;
     text-align: center;
+    position: relative;
 
     @include respondMax($bp-large) {
       padding: var(--smallest) var(--medium);
     }
 
-    @include respondMax($bp-smaller) {
+    // @include respondMax($bp-small) {
+    //   padding: var(--smallest) var(--medium);
+    // }
+
+    @include respondMax($bp-smallest) {
       padding: var(--smallest) var(--smaller);
     }
 
@@ -69,13 +83,38 @@
       transform: translateY(-1px);
     }
 
-    &.disable {
+    &.disable,
+    &.disable-interval {
       color: var(--color-grey-light-3);
       background-color: var(--color-grey-dark-4);
 
       &:hover {
         transform: none;
+        background-color: var(--color-grey-dark-4);
       }
+    }
+  }
+
+  &--add-to-cart {
+    &:hover {
+      // &::before {
+      //   animation: moveToTopAndDisappear 1s cubic-bezier(0.16, 1, 0.3, 1);
+      // }
+    }
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 3px;
+      background-color: inherit;
+      // transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: -5;
+      animation: moveToTopAndDisappear 1s cubic-bezier(0.16, 1, 0.3, 1);
     }
   }
 

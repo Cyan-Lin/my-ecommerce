@@ -50,7 +50,6 @@ const ProductView = ({
       return;
     plusRef.current.classList.remove('disable');
     minusRef.current.classList.remove('disable');
-    addToCartRef.current.classList.remove('disable');
 
     if (
       product.countInStock <= qty ||
@@ -91,9 +90,20 @@ const ProductView = ({
   };
 
   const onAddProductToCartClick = () => {
-    if (product.countInStock >= (cartItem?.amount || 0) + qty) {
+    let removeClass;
+    if (
+      product.countInStock >= (cartItem?.amount || 0) + qty &&
+      !addToCartRef.current?.classList.contains('disable-interval')
+    ) {
       addProductToCart(product, qty);
       setQty(1);
+      addToCartRef.current.classList.add('btn--add-to-cart');
+      addToCartRef.current.classList.add('disable-interval');
+      clearTimeout(removeClass);
+      removeClass = setTimeout(() => {
+        addToCartRef.current?.classList.remove('btn--add-to-cart');
+        addToCartRef.current?.classList.remove('disable-interval');
+      }, 800);
     }
   };
 

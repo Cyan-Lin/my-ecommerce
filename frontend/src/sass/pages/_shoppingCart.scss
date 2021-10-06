@@ -3,6 +3,10 @@
     width: 80%;
     margin: 0 auto;
   }
+
+  @include respondMax($bp-smaller) {
+    width: 95%;
+  }
 }
 
 .cart {

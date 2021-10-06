@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
 
 const ShoppingCart = ({ cart, itemAmount, orderTotal }) => {
-  console.log(itemAmount, orderTotal);
   const renderCartItems = () => {
     return cart.map(item => <CartItem key={item._id} product={item} />);
   };

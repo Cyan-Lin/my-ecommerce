@@ -4,7 +4,15 @@
 .history {
   &__list {
     background-color: var(--color-whtie);
-    padding: 4rem 4rem;
+    padding: var(--medium);
+
+    @include respondMax($bp-medium) {
+      padding: var(--smaller);
+    }
+
+    @include respondMax($bp-small) {
+      padding: var(--smallest);
+    }
   }
 
   &__item {
@@ -12,13 +20,31 @@
     // justify-content: space-between;
     align-items: center;
     list-style: none;
-    padding: 1rem 2rem;
+    padding: var(--smallest) var(--smaller);
     border-bottom: var(--border-bottom);
+
+    @include respondMax($bp-medium) {
+      padding: var(--smallest);
+    }
   }
 
   &__img-box {
-    width: 12rem;
+    flex: 0 0 14%;
+    // width: 15rem;
     height: 15rem;
+
+    @include respondMax($bp-small) {
+      flex: 0 0 20%;
+      height: 12.5rem;
+    }
+
+    @include respondMax($bp-smaller) {
+      flex: 0 0 25%;
+    }
+
+    @include respondMax($bp-smallest) {
+      flex: 0 0 30%;
+    }
   }
 
   &__img {
@@ -27,30 +53,70 @@
     object-fit: cover;
   }
 
+  &__product-info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    @include respondMax($bp-small) {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: var(--medium);
+    }
+
+    @include respondMax($bp-smaller) {
+      margin-left: var(--smaller);
+    }
+  }
+
   &__product-name {
     font-size: 2.2rem;
     font-weight: 300;
     margin-left: var(--medium);
     color: var(--color-grey-dark-1);
+
+    @include respondMax($bp-medium) {
+      margin-left: var(--smaller);
+      font-size: 2rem;
+    }
+
+    @include respondMax($bp-small) {
+      margin-left: unset;
+      font-size: 1.8rem;
+      margin-bottom: var(--smallest);
+    }
   }
 
   &__qty-price {
     text-align: center;
     margin-left: auto;
     color: var(--color-grey-dark-4);
+    font-size: 1.8rem;
+
+    @include respondMax($bp-small) {
+      margin-left: unset;
+      text-align: unset;
+      font-size: 1.5rem;
+    }
   }
 
   &__product-qty {
-    font-size: 1.8rem;
     margin-bottom: var(--smallest);
+
+    @include respondMax($bp-small) {
+      margin-bottom: unset;
+    }
   }
 
   &__product-price {
-    font-size: 1.8rem;
   }
 
   &__date {
     margin-left: var(--medium);
     color: var(--color-grey-dark-4);
+
+    @include respondMax($bp-small) {
+      margin-left: unset;
+    }
   }
 }

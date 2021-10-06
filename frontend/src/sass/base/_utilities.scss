@@ -1,4 +1,6 @@
 // properties setted using class
 .clickable {
-  cursor: pointer;
+  @include respondMax($bp-medium) {
+    cursor: pointer;
+  }
 }
