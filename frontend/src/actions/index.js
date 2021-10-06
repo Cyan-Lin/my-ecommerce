@@ -76,7 +76,7 @@ export const submitOrder = (values, products, history) => async dispatch => {
     })
   );
 
-  const { data } = await axios.post('api/products', {
+  const { data } = await axios.post('/api/orders', {
     values,
     orderedProducts,
   });
