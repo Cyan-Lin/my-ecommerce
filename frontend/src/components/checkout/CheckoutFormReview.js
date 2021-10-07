@@ -1,9 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+import {
+  CardElement,
+  Elements,
+  useElements,
+  useStripe,
+} from '@stripe/react-stripe-js';
 
 import inputFields from './inputFields';
 import { submitOrder } from '../../actions';
+import { ELEMENTS_OPTIONS } from '../../config';
 
 const CheckoutFormReview = ({
   onCancel,
@@ -12,9 +20,11 @@ const CheckoutFormReview = ({
   cartProducts,
   history,
 }) => {
-  console.log(formValues);
-  console.log(cartProducts);
-  console.log(history);
+  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+
+  // console.log(formValues);
+  // console.log(cartProducts);
+  // console.log(history);
 
   const renderReviewForm = () => {
     return inputFields.map(({ label, name }, i) => {
@@ -29,22 +39,72 @@ const CheckoutFormReview = ({
     });
   };
 
+  // stripe form 要放在 components內(首字母大寫)
+  const CardForm = () => {
+    const stripe = useStripe();
+    const elements = useElements();
+
+    const handleSubmit = async e => {
+      e.preventDefault();
+
+      if (!stripe || !elements) {
+        // Stripe.js has not loaded yet. Make sure to disable
+        // form submission until Stripe.js has loaded.
+        return;
+      }
+
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: elements.getElement(CardElement),
+      });
+
+      // id need to send to backend
+      console.log(paymentMethod);
+      console.log(error?.message);
+      if (error) return;
+      submitOrder(formValues, cartProducts, history);
+    };
+
+    return (
+      <form className="form__card-form" onSubmit={handleSubmit}>
+        <h2 className="heading-tertiary">
+          Please Enter your Credit Card Number
+        </h2>
+        <div className="form__card-element">
+          <CardElement />
+        </div>
+
+        <div className="form__action">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="btn btn--rectangle btn--orange"
+          >
+            Back
+          </button>
+          <button className="btn btn--rectangle btn--green">Confirm</button>
+        </div>
+      </form>
+    );
+  };
+
   return (
     <div className="checkout-form">
       <h2 className="heading-tertiary">Please confirm your entries</h2>
       <div className="form__content">{renderReviewForm()}</div>
 
-      <div className="form__action">
-        <button onClick={onCancel} className="btn btn--rectangle btn--orange">
-          Back
-        </button>
+      <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
+        <CardForm />
+      </Elements>
+
+      {/* <div className="form__action">
         <button
           onClick={() => submitOrder(formValues, cartProducts, history)}
           className="btn btn--rectangle btn--green"
         >
           Confirm
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -119,6 +119,21 @@
       justify-content: space-between;
     }
   }
+
+  &__card-form {
+    width: 100%;
+    border-top: var(--border-bottom);
+    padding: 1rem 0;
+    // padding: 2rem;
+    // background-color: lightblue;
+  }
+
+  &__card-element {
+    padding: 1rem;
+    margin: var(--smaller) 0;
+    background-color: var(--color-grey-light-1);
+    border-radius: 3px;
+  }
 }
 
 // cart in checkout
@@ -137,7 +152,7 @@
 
   @include respondMax($bp-medium) {
     align-self: center;
-    width: 38rem;
+    // width: 38rem;
     margin-top: unset;
     margin-left: unset;
     margin-bottom: var(--smaller);
@@ -149,11 +164,12 @@
 
   &__toggle {
     position: absolute;
-    top: 1.5rem;
+    top: 50%;
     right: 1rem;
     width: 1.5rem;
     height: 1.5rem;
     display: none;
+    transform: translateY(-50%);
 
     @include respondMax($bp-medium) {
       display: block;

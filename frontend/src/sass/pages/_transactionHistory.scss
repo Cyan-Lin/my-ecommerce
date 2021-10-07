@@ -29,9 +29,13 @@
   }
 
   &__img-box {
-    flex: 0 0 14%;
-    // width: 15rem;
+    flex: 0 0 12%;
     height: 15rem;
+
+    @include respondMax($bp-medium) {
+      flex: 0 0 15%;
+      height: 15rem;
+    }
 
     @include respondMax($bp-small) {
       flex: 0 0 20%;

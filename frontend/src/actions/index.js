@@ -65,25 +65,36 @@ export const removeProductFromWishlist = id => {
   };
 };
 
-export const submitOrder = (values, products, history) => async dispatch => {
-  const orderedProducts = products.map(
-    ({ _id, name, price, imageUrl, amount }) => ({
-      _id,
-      name,
-      price,
-      imageUrl,
-      amount,
-    })
-  );
+export const submitOrder =
+  (values, products, history) => async (dispatch, getState) => {
+    const orderedProducts = products.map(
+      ({ _id, name, price, imageUrl, amount }) => ({
+        _id,
+        name,
+        price,
+        imageUrl,
+        amount,
+      })
+    );
 
-  const { data } = await axios.post('/api/orders', {
-    values,
-    orderedProducts,
-  });
-  history.push('/products');
-  console.log(data);
-  // dispatch({ type: FETCH_USER, payload: data });
-};
+    // console.log(getState())
+
+    const totalCost = Object.values(getState().cart)
+      .reduce(
+        (sum, currentItem) => (sum += currentItem.amount * currentItem.price),
+        0
+      )
+      .toFixed(2);
+
+    const { data } = await axios.post('/api/orders', {
+      values,
+      orderedProducts,
+      totalCost,
+    });
+    history.push('/products');
+
+    // dispatch({ type: FETCH_USER, payload: data });
+  };
 
 export const fetchOrders = () => async dispatch => {
   const { data } = await axios.get('/api/orders');

@@ -1,3 +1,6 @@
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 const Order = require('../models/Order');
 const Product = require('../models/Product');
 
@@ -6,8 +9,10 @@ const postOrder = async (req, res) => {
     const {
       values: { name, phoneNumber, email, city, district, detailAddress },
       orderedProducts,
+      totalCost,
     } = req.body;
 
+    // console.log(stripeToken, totalCost);
     // console.log(name, phoneNumber, email, city, district, detailAddress);
 
     const editedOrderedProducts = orderedProducts.map(
@@ -19,7 +24,16 @@ const postOrder = async (req, res) => {
         _product: _id,
       })
     );
-    console.log(editedOrderedProducts);
+
+    // stripe usd 單位為cents => 100 usd = $1
+    const charge = await stripe.paymentIntents.create({
+      amount: Number((totalCost * 0.036 * 100).toFixed(0)),
+      currency: 'usd',
+      // paymentIntents 不需要description和source但要payment_method_types: ['card']
+      // description: 'order cost',
+      // source: stripeToken,
+      payment_method_types: ['card'],
+    });
 
     const order = new Order({
       name,

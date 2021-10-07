@@ -10,8 +10,18 @@
   font-weight: 400;
   text-transform: uppercase;
   margin-bottom: var(--smaller);
+  position: relative;
+
+  @include respondMax($bp-small) {
+    font-size: 2.4rem;
+  }
 
   @include respondMax($bp-smaller) {
+    font-size: 2rem;
     padding: 0 2rem;
+  }
+
+  @include respondMax($bp-smallest) {
+    font-size: 1.8rem;
   }
 }

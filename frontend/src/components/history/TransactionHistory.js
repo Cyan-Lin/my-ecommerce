@@ -1,21 +1,32 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import HistoryItem from './HistoryItem';
 import { fetchOrders } from '../../actions';
 
-const TransactionHistory = ({ fetchOrders, orders }) => {
+const TransactionHistory = ({ orders }) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchOrders();
-  }, [fetchOrders]);
+    dispatch(fetchOrders());
+  }, [dispatch]);
 
   const renderHistoryItem = () => {
-    console.log(orders);
     if (!orders.length) return '';
 
-    return orders.map(order => {
-      return <HistoryItem />;
-    });
+    const productArr = orders.reduce((accArr, currentOrder) => {
+      console.log(currentOrder);
+      currentOrder.orderedProducts.forEach(product => {
+        product.transactionDate = currentOrder.transactionDate;
+        accArr.push(product);
+      });
+      return accArr;
+    }, []);
+
+    console.log(productArr);
+    return productArr.map(product => (
+      <HistoryItem key={product._id} product={product} />
+    ));
   };
 
   return (
@@ -32,4 +43,4 @@ const mapStateToProps = state => {
   return { orders: Object.values(state.orders) };
 };
 
-export default connect(mapStateToProps, { fetchOrders })(TransactionHistory);
+export default connect(mapStateToProps)(TransactionHistory);
