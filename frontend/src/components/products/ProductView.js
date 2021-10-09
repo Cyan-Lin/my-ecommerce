@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import {
   fetchProduct,
@@ -10,7 +10,6 @@ import {
 
 const ProductView = ({
   match,
-  fetchProduct,
   product,
   addProductToCart,
   addProductToWishlist,
@@ -18,6 +17,7 @@ const ProductView = ({
   wishItem,
   cartItem,
 }) => {
+  const dispatch = useDispatch();
   const productId = match.params.id;
 
   const [qty, setQty] = useState(1);
@@ -27,8 +27,8 @@ const ProductView = ({
   const addToCartRef = useRef(null);
 
   useEffect(() => {
-    fetchProduct(productId);
-  }, [fetchProduct, productId]);
+    dispatch(fetchProduct(productId));
+  }, [dispatch, productId]);
 
   useEffect(() => {
     if (heartRef.current) {
@@ -104,6 +104,7 @@ const ProductView = ({
         addToCartRef.current?.classList.remove('btn--add-to-cart');
         addToCartRef.current?.classList.remove('disable-interval');
       }, 800);
+      console.log(cartItem);
     }
   };
 
@@ -187,7 +188,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default connect(mapStateToProps, {
-  fetchProduct,
   addProductToCart,
   addProductToWishlist,
   removeProductFromWishlist,

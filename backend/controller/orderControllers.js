@@ -56,7 +56,7 @@ const postOrder = async (req, res) => {
       ).exec();
     });
 
-    res.send({});
+    res.send(order);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server Error' });

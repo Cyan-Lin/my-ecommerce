@@ -1,0 +1,78 @@
+.landing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  @include respondMax($bp-medium) {
+    margin: -2rem;
+    width: 100vw;
+  }
+}
+
+.slider {
+  overflow: hidden;
+  width: 100%;
+  height: 70rem;
+
+  // 父子元素要有相對關係position,overflow才會有效
+  position: relative;
+
+  @include respondMax($bp-large) {
+    height: calc(100vh - 14rem);
+  }
+
+  &__slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+
+    // mobile grab
+    user-select: none;
+
+    @include respondMax($bp-large) {
+    }
+
+    &:nth-child(1) {
+      transform: translateX(0);
+    }
+    &:nth-child(2) {
+      transform: translateX(100%);
+    }
+    &:nth-child(3) {
+      transform: translateX(200%);
+    }
+    &:nth-child(4) {
+      transform: translateX(300%);
+    }
+    &:nth-child(5) {
+      transform: translateX(400%);
+    }
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__dots {
+    position: absolute;
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+  }
+
+  &__btn-box {
+    position: absolute;
+    bottom: 10rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

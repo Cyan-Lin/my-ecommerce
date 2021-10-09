@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import Navigation from './Navigation';
 import ProductList from './products/ProductList';
@@ -11,13 +11,22 @@ import TransactionHistory from './history/TransactionHistory';
 import Wishlist from './wishlist/Wishlist';
 import Checkout from './checkout/Checkout';
 
-import { fetchUser, fetchProducts } from '../actions';
+import {
+  fetchUser,
+  fetchProducts,
+  loadLocalStorage,
+  fetchOrders,
+} from '../actions';
 
-const App = ({ fetchUser, fetchProducts }) => {
+const App = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchUser();
-    fetchProducts();
-  }, [fetchUser, fetchProducts]);
+    dispatch(loadLocalStorage());
+    dispatch(fetchUser());
+    dispatch(fetchProducts());
+    dispatch(fetchOrders());
+  }, [dispatch]);
 
   return (
     <div className="container">
@@ -43,4 +52,4 @@ const App = ({ fetchUser, fetchProducts }) => {
   );
 };
 
-export default connect(null, { fetchUser, fetchProducts })(App);
+export default connect(null)(App);

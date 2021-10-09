@@ -31,6 +31,10 @@
   &__img-box {
     flex: 0 0 12%;
     height: 15rem;
+    cursor: pointer;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
 
     @include respondMax($bp-medium) {
       flex: 0 0 15%;
@@ -49,12 +53,41 @@
     @include respondMax($bp-smallest) {
       flex: 0 0 30%;
     }
+
+    &:hover {
+      &::after {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -50%);
+      }
+
+      & .history__img {
+        transform: scale(1.2);
+        filter: blur(3px) brightness(80%);
+      }
+    }
+
+    &::after {
+      content: 'Buy again?';
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      color: var(--color-whtie);
+      font-size: 1.3rem;
+      transform: translate(-50%, 3rem);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
   }
 
   &__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: all 0.3s;
+    backface-visibility: hidden;
   }
 
   &__product-info {

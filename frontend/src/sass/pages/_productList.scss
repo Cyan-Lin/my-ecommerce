@@ -3,7 +3,7 @@
   margin: 0 auto;
   display: grid;
   /* auto-fill:在第一排都排不滿的情況下 也不會填滿width, auto-fit則會填滿width */
-  /* minmax:使得 grid-item 最小至少要 300px，最大則會自己延伸 */
+  /* minmax:使得 grid-item 最小至少要 25rem，最大則會自己延伸(1fr) */
   grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   /* grid-gap: <grid-row-gap> <grid-column-gap>; */
   grid-gap: 2rem;

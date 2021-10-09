@@ -84,7 +84,11 @@ const Navigation = ({
   return (
     <div className="navigation" onClick={onNavClick}>
       <div className="navigation__logo-box">
-        <Link to="/" data-tab="/" className="navigation__logo-link">
+        <Link
+          to={auth ? '/products' : '/'}
+          data-tab="/"
+          className="navigation__logo-link"
+        >
           CyShop
         </Link>
       </div>

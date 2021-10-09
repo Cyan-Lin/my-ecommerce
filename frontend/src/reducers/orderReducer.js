@@ -1,4 +1,4 @@
-import { FETCH_ORDERS } from '../actions/types';
+import { FETCH_ORDERS, PUSH_ORDER } from '../actions/types';
 
 export const orderReducer = (state = {}, action) => {
   switch (action.type) {
@@ -9,6 +9,8 @@ export const orderReducer = (state = {}, action) => {
       });
 
       return { ...state, ...newObject };
+    case PUSH_ORDER:
+      return { ...state, [action.payload._id]: action.payload };
     default:
       return state;
   }

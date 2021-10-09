@@ -143,4 +143,62 @@
       background-color: var(--color-orange-light);
     }
   }
+
+  &--slider {
+    font-size: 3rem;
+    background-color: var(--color-grey-light-1-transparent-2);
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background-color: var(--color-grey-light-1-transparent-1);
+    }
+  }
+
+  &--abs-left {
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    transform: translateY(-50%);
+  }
+
+  &--abs-right {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+  }
+
+  &--dot {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--color-grey-light-2);
+    border-radius: 50%;
+    margin-right: 2rem;
+    box-shadow: var(--shadow-dark);
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover,
+    &.active {
+      background-color: var(--color-grey-light-4);
+    }
+  }
+
+  &--glass {
+    color: var(--color-grey-dark-2);
+    background-color: var(--color-glass);
+    border: 2px solid var(--color-grey-light-2);
+
+    &:hover {
+      background-color: var(--color-grey-light-2);
+      color: var(--color-grey-dark-2);
+    }
+  }
 }

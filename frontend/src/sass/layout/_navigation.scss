@@ -11,7 +11,7 @@
   box-shadow: var(--shadow-light);
   border-radius: 3px;
   z-index: 100;
-  background-color: var(--color-grey-light-1-transparent);
+  background-color: var(--color-grey-light-1-transparent-1);
 
   @include respondMax($bp-large) {
     width: 100%;

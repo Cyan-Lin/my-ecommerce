@@ -10,6 +10,8 @@ import {
   ADD_PRODUCT_TO_WISHLIST,
   REMOVE_PRODUCT_FROM_WISHLIST,
   FETCH_ORDERS,
+  LOAD_LOCAL_STORAGE,
+  PUSH_ORDER,
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -30,38 +32,84 @@ export const fetchProduct = id => async dispatch => {
   return dispatch({ type: FETCH_PRODUCT, payload: data });
 };
 
-export const addProductToCart = (product, amount) => {
+export const loadLocalStorage = () => {
+  // 這裡發生一個錯誤,結果是因為原本不小心在localstorage裡面存了wishliist(裡面已經是Object),我又用JSON.parse(),才會報錯,後來在console用localStorage.clear清除後就好了
+  const localCart = JSON.parse(localStorage.getItem('cart')) || {};
+  const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || {};
+
   return {
-    type: ADD_PRODUCT_TO_CART,
-    payload: { ...product, amount },
+    type: LOAD_LOCAL_STORAGE,
+    payload: { localCart, localWishlist },
   };
 };
 
+export const addProductToCart =
+  (product, amount) => async (dispatch, getState) => {
+    const localCart = JSON.parse(localStorage.getItem('cart')) || {};
+    const newCartProduct = { ...product, amount };
+    // const cart = getState().cart;
+
+    const { [newCartProduct._id]: foundCartProduct } = localCart;
+    // 如果在原cart中找到有相同商品(foundCartProduct)時,把新進來的(cartProduct)amount加上原有商品的amount
+    if (foundCartProduct) newCartProduct.amount += foundCartProduct.amount;
+    const newCart = { ...localCart, [newCartProduct._id]: newCartProduct };
+
+    localStorage.setItem('cart', JSON.stringify(newCart));
+
+    dispatch({
+      type: ADD_PRODUCT_TO_CART,
+      payload: newCart,
+    });
+  };
+
 export const removeProductFromCart = id => {
+  const localCart = JSON.parse(localStorage.getItem('cart')) || {};
+
+  const { [id]: removedProduct, ...otherCartProducts } = localCart;
+  localStorage.setItem('cart', JSON.stringify(otherCartProducts));
+
   return {
     type: REMOVE_PRODUCT_FROM_CART,
-    payload: id,
+    payload: otherCartProducts,
   };
 };
 
 export const editProductInCart = (id, amount) => {
+  const localCart = JSON.parse(localStorage.getItem('cart')) || {};
+
+  const editedCartProduct = localCart[id];
+  editedCartProduct.amount = amount;
+
+  const newCart = { ...localCart, [editedCartProduct._id]: editedCartProduct };
+  localStorage.setItem('cart', JSON.stringify(newCart));
+
   return {
     type: EDIT_PRODUCT_IN_CART,
-    payload: { id, amount },
+    payload: newCart,
   };
 };
 
 export const addProductToWishlist = product => {
+  const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || {};
+
+  const newWishlist = { ...localWishlist, [product._id]: product };
+  localStorage.setItem('wishlist', JSON.stringify(newWishlist));
+
   return {
     type: ADD_PRODUCT_TO_WISHLIST,
-    payload: product,
+    payload: newWishlist,
   };
 };
 
 export const removeProductFromWishlist = id => {
+  const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || {};
+
+  const { [id]: removedProduct, ...otherWishlistProducts } = localWishlist;
+  localStorage.setItem('wishlist', JSON.stringify(otherWishlistProducts));
+
   return {
     type: REMOVE_PRODUCT_FROM_WISHLIST,
-    payload: id,
+    payload: otherWishlistProducts,
   };
 };
 
@@ -77,8 +125,6 @@ export const submitOrder =
       })
     );
 
-    // console.log(getState())
-
     const totalCost = Object.values(getState().cart)
       .reduce(
         (sum, currentItem) => (sum += currentItem.amount * currentItem.price),
@@ -93,7 +139,7 @@ export const submitOrder =
     });
     history.push('/products');
 
-    // dispatch({ type: FETCH_USER, payload: data });
+    dispatch({ type: PUSH_ORDER, payload: data });
   };
 
 export const fetchOrders = () => async dispatch => {

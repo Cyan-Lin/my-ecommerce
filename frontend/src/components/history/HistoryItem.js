@@ -1,11 +1,18 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
-const historyItem = ({
-  product: { imageUrl, name, amount, price, transactionDate },
+const HistoryItem = ({
+  product: { imageUrl, name, amount, price, transactionDate, _product },
 }) => {
+  const history = useHistory();
+
+  const onImageBoxClick = () => {
+    history.push(`/products/${_product}`);
+  };
+
   return (
     <li className="history__item">
-      <div className="history__img-box">
+      <div onClick={onImageBoxClick} className="history__img-box">
         <img className="history__img" src={imageUrl} alt="product pic" />
       </div>
       <div className="history__product-info">
@@ -22,4 +29,4 @@ const historyItem = ({
   );
 };
 
-export default historyItem;
+export default HistoryItem;

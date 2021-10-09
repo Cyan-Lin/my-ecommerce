@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
 import HistoryItem from './HistoryItem';
-import { fetchOrders } from '../../actions';
+// import { fetchOrders } from '../../actions';
 
 const TransactionHistory = ({ orders }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchOrders());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchOrders());
+  // }, [dispatch]);
 
   const renderHistoryItem = () => {
     if (!orders.length) return '';
