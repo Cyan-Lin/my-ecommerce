@@ -1,0 +1,51 @@
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(4px);
+    filter: brightness(80%);
+
+    z-index: var(--z-1000);
+  }
+
+  &__text {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-loader-text);
+    font-size: 1.6rem;
+
+    @include respondMax($bp-small) {
+      font-size: 1.4rem;
+      width: 12rem;
+      height: 12rem;
+    }
+  }
+
+  &__ring {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    box-shadow: var(--shadow-loader-ring);
+    animation: ringLoader 0.8s linear infinite;
+
+    @include respondMax($bp-small) {
+      width: 12rem;
+      height: 12rem;
+    }
+  }
+}

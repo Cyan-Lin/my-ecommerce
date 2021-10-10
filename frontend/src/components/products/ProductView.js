@@ -104,7 +104,6 @@ const ProductView = ({
         addToCartRef.current?.classList.remove('btn--add-to-cart');
         addToCartRef.current?.classList.remove('disable-interval');
       }, 800);
-      console.log(cartItem);
     }
   };
 

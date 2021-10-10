@@ -137,6 +137,8 @@ export const submitOrder =
       orderedProducts,
       totalCost,
     });
+
+    localStorage.setItem('cart', JSON.stringify({}));
     history.push('/products');
 
     dispatch({ type: PUSH_ORDER, payload: data });

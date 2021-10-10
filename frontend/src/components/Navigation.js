@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import Loader from './Loader';
+
 const Navigation = ({
   location,
   auth,
@@ -153,6 +155,9 @@ const Navigation = ({
           {renderGoogleLogin()}
         </ul>
       </div>
+
+      {/* <Loader /> */}
+      {auth === null ? <Loader /> : ''}
     </div>
   );
 };

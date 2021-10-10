@@ -2,6 +2,7 @@ import {
   ADD_PRODUCT_TO_CART,
   EDIT_PRODUCT_IN_CART,
   LOAD_LOCAL_STORAGE,
+  PUSH_ORDER,
   REMOVE_PRODUCT_FROM_CART,
 } from '../actions/types';
 
@@ -28,6 +29,10 @@ export const cartReducer = (state = {}, action) => {
       // editedProduct.amount = action.payload.amount;
 
       return action.payload;
+
+    // clear cart after order completed
+    case PUSH_ORDER:
+      return {};
     default:
       return state;
   }

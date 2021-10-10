@@ -12,20 +12,26 @@ const ShoppingCart = ({ cart, itemAmount, orderTotal }) => {
   return (
     <div className="shopping-cart">
       <h2 className="heading-secondary">Shopping Cart</h2>
-      <div className="cart">
-        <ul className="cart__list">{renderCartItems()}</ul>
-        <div className="cart__action">
-          <div className="cart__total-item">
-            Items<span>{itemAmount}</span>
+      {cart.length === 0 ? (
+        <p className="heading-quaternary text-center">
+          Your shopping cart is empty ✨
+        </p>
+      ) : (
+        <div className="cart">
+          <ul className="cart__list">{renderCartItems()}</ul>
+          <div className="cart__action">
+            <div className="cart__total-item">
+              Items<span>{itemAmount}</span>
+            </div>
+            <div className="cart__total-order">
+              Order Total<span>NT${orderTotal.toFixed(2)}</span>
+            </div>
+            <Link to="/checkout" className="btn btn--rectangle btn--green">
+              Checkout
+            </Link>
           </div>
-          <div className="cart__total-order">
-            Order Total<span>NT${orderTotal.toFixed(2)}</span>
-          </div>
-          <Link to="/checkout" className="btn btn--rectangle btn--green">
-            Checkout
-          </Link>
         </div>
-      </div>
+      )}
     </div>
   );
 };

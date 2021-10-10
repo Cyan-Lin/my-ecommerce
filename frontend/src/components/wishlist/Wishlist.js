@@ -5,15 +5,19 @@ import ProductCard from '../products/ProductCard';
 
 const Wishlist = ({ wishlist }) => {
   const renderWishList = () => {
-    console.log(wishlist);
-
     return wishlist.map(item => <ProductCard key={item._id} product={item} />);
   };
 
   return (
     <>
       <h2 className="heading-secondary">My Wishlist</h2>
-      <div className="product-list">{renderWishList()}</div>
+      {wishlist.length === 0 ? (
+        <p className="heading-quaternary text-center">
+          Your wishlist is empty ✨
+        </p>
+      ) : (
+        <div className="product-list">{renderWishList()}</div>
+      )}
     </>
   );
 };

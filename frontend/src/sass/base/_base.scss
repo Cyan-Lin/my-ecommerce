@@ -33,15 +33,20 @@ body {
   background-color: var(--color-grey-light-1);
   line-height: 1.7;
   color: var(--color-grey-dark-2);
-  height: calc(100% - 7rem);
 
   @include respondMax($bp-large) {
     padding: 0;
   }
+
+  @include respondMax($bp-medium) {
+    height: calc(100% - 7rem);
+  }
 }
 
 #root {
-  height: 100%;
+  @include respondMax($bp-medium) {
+    height: 100%;
+  }
 }
 
 ::selection {

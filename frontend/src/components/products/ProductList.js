@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ProductCard from './ProductCard';
+// import Loader from '../Loader';
 
 const ProductList = ({ products }) => {
   const renderProductCard = () => {
@@ -14,6 +15,7 @@ const ProductList = ({ products }) => {
     <>
       <h2 className="heading-secondary">New Arrival</h2>
       <div className="product-list">{renderProductCard()}</div>
+      {/* <Loader /> */}
     </>
   );
 };

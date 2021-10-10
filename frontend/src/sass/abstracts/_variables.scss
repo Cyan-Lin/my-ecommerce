@@ -26,6 +26,9 @@
   --shadow-lighter: 0 1rem 2rem rgba(0, 0, 0, 0.05);
   --shadow-dark: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.7);
 
+  --shadow-loader-ring: 0 4px 0 #212529;
+  --shadow-loader-text: 0 0 5px rgba(0, 0, 0, 0.2);
+
   --border-bottom: 1px solid var(--color-grey-light-3);
 
   --smallest: 1rem;
@@ -33,4 +36,7 @@
   --medium: 4rem;
   --large: 8rem;
   --largest: 15rem;
+
+  --z-100: 100;
+  --z-1000: 1000;
 }
