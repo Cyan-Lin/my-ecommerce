@@ -13,6 +13,7 @@ html {
   box-sizing: border-box;
   // 10px
   font-size: 62.5%;
+  height: 100%;
 
   @include respondMax($bp-large) {
     // 9px
@@ -32,10 +33,15 @@ body {
   background-color: var(--color-grey-light-1);
   line-height: 1.7;
   color: var(--color-grey-dark-2);
+  height: 100%;
 
   @include respondMax($bp-large) {
     padding: 0;
   }
+}
+
+#root {
+  height: 100%;
 }
 
 ::selection {

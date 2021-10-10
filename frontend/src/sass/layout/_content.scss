@@ -1,11 +1,19 @@
 .container {
+  height: 100%;
 }
 
 .content {
   max-width: 120rem;
-  margin: var(--medium) auto;
+  margin: var(--smaller) auto;
+
+  height: calc(100% - 14rem);
 
   @include respondMax($bp-large) {
     padding: 0 var(--smaller);
+    height: calc(100% - 12rem);
+  }
+
+  @include respondMax($bp-medium) {
+    height: calc(100% - 7rem);
   }
 }

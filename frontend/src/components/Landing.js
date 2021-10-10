@@ -24,7 +24,13 @@ const Landing = () => {
   }, [currentSlide]);
 
   const getPostionX = e => {
-    return e.type.includes('Mouse') ? e.nativeEvent.clientX : e.clientX;
+    // 滑鼠事件
+    if (e.type.includes('mouse')) {
+      return e.nativeEvent.clientX;
+    } else {
+      // e.touches[0]?.clientX 只有onTouchStart有, onTouchEnd要用e.changedTouches[0].clientX, 且其e.touches[0]為undefined
+      return e.touches[0]?.clientX || e.changedTouches[0].clientX;
+    }
   };
 
   const touchStart = function (e) {
@@ -32,11 +38,14 @@ const Landing = () => {
   };
 
   const touchEnd = e => {
+    // 若起點=0或是undefined(初始)則返回
     if (!startPositionX) return;
 
     const endPositionX = getPostionX(e);
     const distance = startPositionX - endPositionX;
+    // console.log(distance);
 
+    // 起點至終點的距離大於100px以上觸發滑動carousel
     if (distance > 100) {
       onBtnRightClick();
     } else if (distance < -100) {
@@ -109,9 +118,8 @@ const Landing = () => {
   };
 
   const activateDot = slide => {
-    console.log(slide);
+    // console.log(slide);
     const allDots = document.querySelectorAll('.btn--dot');
-    console.log(allDots);
     allDots.forEach(dot => dot.classList.remove('active'));
     document
       .querySelector(`.btn--dot[data-slide="${slide}"]`)
