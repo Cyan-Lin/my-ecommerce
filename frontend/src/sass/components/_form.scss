@@ -15,6 +15,7 @@
     padding: var(--smaller) var(--medium);
     order: 1;
     align-self: center;
+    margin-bottom: var(--smaller);
   }
 
   @include respondMax($bp-smaller) {

@@ -1,5 +1,5 @@
 .navigation {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   height: 7rem;
@@ -168,6 +168,7 @@
       margin-right: 1rem;
     }
 
+    // google login in navigation link
     &:last-child .navigation__link {
       &:link,
       &:visited {
@@ -176,11 +177,12 @@
         padding: 0 1.5rem;
         width: auto;
         border-radius: 3px;
-        border: 3px solid var(--color-grey-dark-4);
+        border: 2px solid var(--color-grey-dark-4);
         margin-left: 0.5rem;
 
         @include respondMax($bp-medium) {
           padding: 0 2.5rem;
+          width: 12rem;
         }
       }
 
@@ -201,6 +203,7 @@
     }
   }
 
+  // navigation link
   &__link {
     &:link,
     &:visited {
@@ -223,7 +226,8 @@
 
       @include respondMax($bp-medium) {
         flex-direction: row;
-        margin-bottom: 1rem;
+        margin-bottom: var(--smaller);
+        width: 12rem;
       }
     }
 

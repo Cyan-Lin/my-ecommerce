@@ -5,6 +5,7 @@
 .content {
   max-width: 120rem;
   margin: var(--smaller) auto;
+  margin-top: 9rem;
 
   height: calc(100% - 14rem);
 
@@ -14,6 +15,6 @@
   }
 
   @include respondMax($bp-medium) {
-    height: calc(100% - 7rem);
+    height: calc(100%);
   }
 }
