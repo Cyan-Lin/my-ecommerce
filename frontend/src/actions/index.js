@@ -114,7 +114,8 @@ export const removeProductFromWishlist = id => {
 };
 
 export const submitOrder =
-  (values, products, history) => async (dispatch, getState) => {
+  (values, products, history, setOrderDealing) =>
+  async (dispatch, getState) => {
     const orderedProducts = products.map(
       ({ _id, name, price, imageUrl, amount }) => ({
         _id,
@@ -138,6 +139,7 @@ export const submitOrder =
       totalCost,
     });
 
+    setOrderDealing(false);
     localStorage.setItem('cart', JSON.stringify({}));
     history.push('/products');
 

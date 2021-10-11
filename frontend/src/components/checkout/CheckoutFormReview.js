@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
@@ -12,6 +12,7 @@ import {
 import inputFields from './inputFields';
 import { submitOrder } from '../../actions';
 import { ELEMENTS_OPTIONS } from '../../config';
+import Loader from '../Loader';
 
 const CheckoutFormReview = ({
   onCancel,
@@ -20,6 +21,8 @@ const CheckoutFormReview = ({
   cartProducts,
   history,
 }) => {
+  const [orderDealing, setOrderDealing] = useState(false);
+
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
   // console.log(formValues);
@@ -58,11 +61,14 @@ const CheckoutFormReview = ({
         card: elements.getElement(CardElement),
       });
 
-      // id need to send to backend
+      // id need to send to backend (用paymentMethod好像就不用token之類的,直接送後端就好了)
       // console.log(paymentMethod);
       // console.log(error?.message);
       if (error) return;
-      submitOrder(formValues, cartProducts, history);
+
+      // send checkout form, cartProducts, history, and Loader setter to backend
+      setOrderDealing(true);
+      submitOrder(formValues, cartProducts, history, setOrderDealing);
     };
 
     return (
@@ -96,6 +102,8 @@ const CheckoutFormReview = ({
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
         <CardForm />
       </Elements>
+
+      {orderDealing ? <Loader /> : ''}
 
       {/* <div className="form__action">
         <button
