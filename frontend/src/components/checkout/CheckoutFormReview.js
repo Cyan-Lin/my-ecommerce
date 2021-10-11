@@ -59,8 +59,8 @@ const CheckoutFormReview = ({
       });
 
       // id need to send to backend
-      console.log(paymentMethod);
-      console.log(error?.message);
+      // console.log(paymentMethod);
+      // console.log(error?.message);
       if (error) return;
       submitOrder(formValues, cartProducts, history);
     };
