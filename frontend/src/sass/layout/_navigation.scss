@@ -54,6 +54,7 @@
     justify-content: center;
     border: none;
     background-color: var(--color-grey-light-1);
+    z-index: var(--z-100);
 
     // responsive
     display: none;
@@ -133,7 +134,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: calc(100vh - 6rem);
+      height: calc(100vh - 7rem);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -217,6 +218,7 @@
       justify-content: center;
       border-bottom: 3px solid transparent;
       position: relative;
+      font-size: 1.5rem;
 
       transition: color 0.3s, background-color 0.3s;
 
