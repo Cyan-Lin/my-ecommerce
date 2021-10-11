@@ -1,4 +1,6 @@
 .shopping-cart {
+  padding-bottom: 2rem;
+
   @include respondMax($bp-medium) {
     width: 80%;
     margin: 0 auto;
@@ -58,13 +60,13 @@
   }
 
   &__product-name {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     letter-spacing: 0.8px;
     margin-bottom: var(--smallest);
   }
 
   &__product-price {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 300;
     letter-spacing: 1px;
   }
@@ -76,10 +78,17 @@
   }
 
   &__product-amount {
+    display: flex;
+    align-items: center;
+
     & span {
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-weight: 400;
       margin: 0 var(--smallest);
+
+      @include respondMax($bp-smallest) {
+        font-size: 2rem;
+      }
     }
   }
 

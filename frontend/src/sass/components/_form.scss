@@ -125,8 +125,15 @@
     width: 100%;
     border-top: var(--border-bottom);
     padding: 1rem 0;
-    // padding: 2rem;
-    // background-color: lightblue;
+    position: relative;
+
+    // stripe form 字會擠在一起 只好獨立出來
+    @include respondMax($bp-smaller) {
+      height: 25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
   }
 
   &__card-element {
@@ -134,6 +141,16 @@
     margin: var(--smaller) 0;
     background-color: var(--color-grey-light-1);
     border-radius: 3px;
+
+    // stripe form 字會擠在一起 只好獨立出來
+    @include respondMax($bp-smallest) {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: -10%;
+      transform: translateY(-50%);
+      width: 120%;
+    }
   }
 }
 

@@ -34,13 +34,13 @@
   }
 
   &--calc {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: var(--color-grey-dark-3);
     background-color: transparent;
 
-    // @include respondMax($bp-smallest) {
-    //   padding: var(--smallest);
-    // }
+    @include respondMax($bp-smallest) {
+      font-size: 2rem;
+    }
 
     &:hover {
       color: var(--color-grey-dark-1);
@@ -64,7 +64,7 @@
     position: relative;
 
     @include respondMax($bp-large) {
-      padding: var(--smallest) var(--medium);
+      padding: var(--smaller) var(--medium);
     }
 
     // @include respondMax($bp-small) {
@@ -96,12 +96,6 @@
   }
 
   &--add-to-cart {
-    &:hover {
-      // &::before {
-      //   animation: moveToTopAndDisappear 1s cubic-bezier(0.16, 1, 0.3, 1);
-      // }
-    }
-
     &::before {
       content: '';
       display: inline-block;
@@ -112,9 +106,9 @@
       left: 0;
       border-radius: 3px;
       background-color: inherit;
-      // transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: -5;
+      transform: translate(0) scale(1);
       animation: moveToTopAndDisappear 1s cubic-bezier(0.16, 1, 0.3, 1);
+      animation-fill-mode: backwards;
     }
   }
 

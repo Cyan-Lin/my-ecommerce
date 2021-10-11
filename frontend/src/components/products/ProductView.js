@@ -91,6 +91,7 @@ const ProductView = ({
 
   const onAddProductToCartClick = () => {
     let removeClass;
+    clearTimeout(removeClass);
     if (
       product.countInStock >= (cartItem?.amount || 0) + qty &&
       !addToCartRef.current?.classList.contains('disable-interval')
@@ -99,7 +100,6 @@ const ProductView = ({
       setQty(1);
       addToCartRef.current.classList.add('btn--add-to-cart');
       addToCartRef.current.classList.add('disable-interval');
-      clearTimeout(removeClass);
       removeClass = setTimeout(() => {
         addToCartRef.current?.classList.remove('btn--add-to-cart');
         addToCartRef.current?.classList.remove('disable-interval');
@@ -151,7 +151,6 @@ const ProductView = ({
                   <i className="fas fa-minus"></i>
                 </button>
                 <span>{qty}</span>
-                {/* <input type="text" disabled value={qty} /> */}
                 <button
                   ref={plusRef}
                   onClick={onPlusClick}
