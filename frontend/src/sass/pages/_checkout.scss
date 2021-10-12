@@ -1,7 +1,9 @@
 .checkout {
   display: flex;
+  padding-bottom: var(--medium);
 
   @include respondMax($bp-medium) {
     flex-direction: column;
+    padding-bottom: var(--smallest);
   }
 }

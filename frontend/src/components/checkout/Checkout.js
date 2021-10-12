@@ -15,7 +15,6 @@ const Checkout = ({ auth, cart, history }) => {
   // 後來測試發現實際上因為網頁刷新造成redux清空,資料要重新取得,所以初始狀態下auth為null,cart.length===0
   // 判斷式一定會執行,所以結論是只能從ShoppingCart進入checkout,從網址輸入就會直接轉到/shopping_cart
   useEffect(() => {
-    console.log(auth, cart.length);
     if (!auth || cart.length === 0) history.push('/shopping_cart');
   }, [auth, cart.length, history]);
 
