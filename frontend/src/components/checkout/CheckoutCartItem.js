@@ -1,3 +1,5 @@
+// checkout cart item
+
 import React from 'react';
 
 const CheckoutCartItem = ({ product: { imageUrl, name, price, amount } }) => {

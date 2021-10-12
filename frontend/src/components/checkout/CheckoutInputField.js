@@ -1,3 +1,5 @@
+// checkout redux form input field
+
 import React from 'react';
 
 const CheckoutField = ({

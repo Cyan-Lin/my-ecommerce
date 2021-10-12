@@ -7,6 +7,7 @@ import Loader from './Loader';
 const Navigation = ({
   location,
   auth,
+  products,
   amountOfWishItems,
   amountOfCartItems,
 }) => {
@@ -157,7 +158,7 @@ const Navigation = ({
       </div>
 
       {/* <Loader /> */}
-      {auth === null ? <Loader /> : ''}
+      {auth === null || products === null ? <Loader /> : ''}
     </div>
   );
 };
@@ -165,6 +166,7 @@ const Navigation = ({
 const mapStateToProps = state => {
   return {
     auth: state.auth,
+    products: state.products,
     amountOfWishItems: Object.values(state.wishlist).length,
     amountOfCartItems: Object.values(state.cart).reduce(
       (sum, currentItem) => sum + currentItem.amount,

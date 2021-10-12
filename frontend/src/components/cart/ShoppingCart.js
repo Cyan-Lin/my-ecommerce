@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 
 import CartItem from './CartItem';
 
+// cart 是從localStorage 引入(詳見App.js loadLocalStorage())
 const ShoppingCart = ({ auth, cart, itemAmount, orderTotal }) => {
   const renderCartItems = () => {
     return cart.map(item => <CartItem key={item._id} product={item} />);
   };
 
+  // 依據使用者是否登入(auth)決定checkout button 的顯示與功能
   const renderCheckoutButton = () => {
     return auth ? (
       <Link to="/checkout" className="btn btn--rectangle btn--green">

@@ -6,8 +6,47 @@ $bp-small: 600px;
 $bp-smaller: 450px;
 $bp-smallest: 350px;
 
+// em stands for emphemeral unit
+
+// em is the unit which ensures the best browser compatibility, i.e. the most similar behavior across browsers.
+// relevant article https://zellwk.com/blog/media-query-units/
+
 @mixin respondMax($breakpoint) {
   @media only screen and (max-width: $breakpoint/16px*1em) {
     @content;
   }
 }
+
+// @function functionName($params){
+// css code
+// }
+
+// e.g. in _mixins.scss
+// @mixin rounded-border {
+//   border: 2px #333 solid;
+//   border-radius: 5px;
+// }
+
+// .article {
+// @include rounded-border;
+// }
+
+// 引數 (Argument)
+// 參數 (Parameter)
+
+// An argument is an expression used when calling the method. 引數 (Argument) 是用於呼叫函式
+// A parameter is the variable which is part of the method’s signature (method declaration). 參數 (Parameter) 是方法簽章 (方法的宣告)
+
+// e.g.
+// num 與 2.0 為 引數 (Argument)，或稱為 函式引數 (Argument of a Function)
+// void Bar()
+// {
+//     int num = 1;
+//     Foo(anInt, 2.0);
+// }
+
+// i 與 f 為 參數 (Parameter)
+// void Foo(int i, float f)
+// {
+// Do things
+// }

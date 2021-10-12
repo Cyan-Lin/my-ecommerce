@@ -10,6 +10,7 @@ const CartItem = ({ product, removeProductFromCart, editProductInCart }) => {
   const plusRef = useRef(null);
   const minusRef = useRef(null);
 
+  // 判斷plusRef.current 與minusRef.current 是否disable
   useEffect(() => {
     if (!product || !plusRef.current || !minusRef.current) return;
     plusRef.current.classList.remove('disable');

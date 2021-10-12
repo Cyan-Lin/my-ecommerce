@@ -1,3 +1,5 @@
+// fire this file in package.json "data:import": "node backend/seederScript.js"
+
 require('dotenv').config;
 
 const connectDB = require('./config/db');
@@ -6,6 +8,7 @@ const Product = require('./models/Product');
 
 connectDB();
 
+// reset all the data
 const importData = async () => {
   try {
     await Product.deleteMany({});

@@ -1,3 +1,5 @@
+// redux form field content
+
 const inputFields = [
   { for_id: 'name', label: 'Name', type: 'text', name: 'name' },
   {

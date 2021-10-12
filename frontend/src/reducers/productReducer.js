@@ -1,6 +1,6 @@
 import { FETCH_PRODUCTS, FETCH_PRODUCT } from '../actions/types';
 
-export const productReducer = (state = {}, action) => {
+export const productReducer = (state = null, action) => {
   switch (action.type) {
     case FETCH_PRODUCTS:
       const newObject = {};

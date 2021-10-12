@@ -1,6 +1,6 @@
 import { FETCH_ORDERS, PUSH_ORDER } from '../actions/types';
 
-export const orderReducer = (state = {}, action) => {
+export const orderReducer = (state = null, action) => {
   switch (action.type) {
     case FETCH_ORDERS:
       const newObject = {};

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Navigation from './Navigation';
 import ProductList from './products/ProductList';
@@ -19,6 +19,7 @@ import {
 } from '../actions';
 
 const App = () => {
+  // 用useDispatch就不需要import connect了
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const App = () => {
 
   return (
     <div className="container">
+      {/* BrowserRouter內的component擁有路由的能力, 且BrowserRouter只接受一個child所以用react fragment */}
       <BrowserRouter>
         <>
           <Navigation />
@@ -52,4 +54,4 @@ const App = () => {
   );
 };
 
-export default connect(null)(App);
+export default App;

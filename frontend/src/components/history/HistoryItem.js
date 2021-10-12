@@ -4,8 +4,10 @@ import { useHistory } from 'react-router-dom';
 const HistoryItem = ({
   product: { imageUrl, name, amount, price, transactionDate, _product },
 }) => {
+  // 此component不在BrowserRouter內,所以要自己引入history
   const history = useHistory();
 
+  // 點擊image則轉址ProductView
   const onImageBoxClick = () => {
     history.push(`/products/${_product}`);
   };

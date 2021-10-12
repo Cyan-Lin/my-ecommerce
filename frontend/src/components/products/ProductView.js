@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 import {
-  fetchProduct,
   addProductToCart,
   addProductToWishlist,
   removeProductFromWishlist,
@@ -17,8 +16,9 @@ const ProductView = ({
   wishItem,
   cartItem,
 }) => {
-  const dispatch = useDispatch();
-  const productId = match.params.id;
+  // **
+  // const dispatch = useDispatch();
+  // const productId = match.params.id;
 
   const [qty, setQty] = useState(1);
   const heartRef = useRef(null);
@@ -26,20 +26,29 @@ const ProductView = ({
   const minusRef = useRef(null);
   const addToCartRef = useRef(null);
 
-  useEffect(() => {
-    dispatch(fetchProduct(productId));
-  }, [dispatch, productId]);
+  // 看了console的network, fetchProduct似乎比App.js的fetchUser, fetchProducts, fetchOrders還要早跑, 所以就不加Loader了
+  // **後來先不加這個,就直接等fetchProducts完成就好,不然又多render一次
+  // useEffect(() => {
+  //   dispatch(fetchProduct(productId));
+  // }, [dispatch, productId]);
 
+  // heart icon turn red or not(initially and rerender), depends on whether there is a wishItem, and most importantly, there is a product
+  // If we don't set product as dependency, this callback will not fire after the product has been fetched, if will stay 'not active'
   useEffect(() => {
-    if (heartRef.current) {
-      if (!wishItem) {
-        heartRef.current.classList.remove('active');
-      } else {
-        heartRef.current.classList.add('active');
-      }
+    if (!heartRef.current || !product) return;
+    if (!wishItem) {
+      heartRef.current.classList.remove('active');
+    } else {
+      heartRef.current.classList.add('active');
     }
-  }, [wishItem]);
+  }, [product, wishItem]);
 
+  /**
+   * 判斷qty+購物車與商品庫存數量 決定是否將按鈕(plusRef.current, minusRef.current, addToCartRef.current)反白(disable)
+   * @product.countInStock {Number} 商品庫存數量
+   * @qty {Number} 使用者畫面目前顯示數量
+   * @cartItem?.amount {Number} 使用者購物車內此商品的數量(可能沒有所以用optional chaining)
+   */
   useEffect(() => {
     if (
       !product ||
@@ -51,44 +60,36 @@ const ProductView = ({
     plusRef.current.classList.remove('disable');
     minusRef.current.classList.remove('disable');
 
-    if (
-      product.countInStock <= qty ||
-      product.countInStock <= (cartItem?.amount || 0) + qty
-    )
+    if (product.countInStock <= (cartItem?.amount || 0) + qty)
       plusRef.current.classList.add('disable');
 
     if (qty === 1) minusRef.current.classList.add('disable');
 
-    // console.log(product.countInStock, qty, cartItem?.amount);
-    if (
-      product.countInStock < qty ||
-      product.countInStock < (cartItem?.amount || 0) + qty
-    )
+    if (product.countInStock < (cartItem?.amount || 0) + qty)
       addToCartRef.current.classList.add('disable');
   }, [qty, product, cartItem?.amount]);
 
+  // click heart icon
   const onWishlistIconClick = () => {
-    if (!wishItem) {
-      return addProductToWishlist(product);
-    }
+    if (!wishItem) return addProductToWishlist(product);
 
     removeProductFromWishlist(product._id);
   };
 
+  // ckick minus button => if qty > 1 (2, 3, ...)
   const onMinusClick = () => {
     if (qty > 1) return setQty(qty - 1);
   };
 
+  // click plus button => if qty > 0 (1, 2, ...) and countInStock > (qty + cartItem?.amount)
   const onPlusClick = () => {
-    if (
-      qty > 0 &&
-      product.countInStock > qty &&
-      product.countInStock > (cartItem?.amount || 0) + qty
-    ) {
+    if (qty > 0 && product.countInStock > (cartItem?.amount || 0) + qty) {
       setQty(qty + 1);
     }
   };
 
+  // click add-to-cart button => clearTimeout
+  // if product.countInStock >= (cartItem?.amount || 0) + qty and addToCartRef.current has no disable class, add disable-interval class then setTimeout to remove disable-interval class in 0.8 sec
   const onAddProductToCartClick = () => {
     let removeClass;
     clearTimeout(removeClass);
@@ -98,10 +99,10 @@ const ProductView = ({
     ) {
       addProductToCart(product, qty);
       setQty(1);
-      addToCartRef.current.classList.add('btn--add-to-cart');
+      addToCartRef.current.classList.add('btn--add-to-cart-animation');
       addToCartRef.current.classList.add('disable-interval');
       removeClass = setTimeout(() => {
-        addToCartRef.current?.classList.remove('btn--add-to-cart');
+        addToCartRef.current?.classList.remove('btn--add-to-cart-animation');
         addToCartRef.current?.classList.remove('disable-interval');
       }, 800);
     }
@@ -117,7 +118,7 @@ const ProductView = ({
         </div>
         <div className="view__info-action">
           <div className="view__info">
-            <div className="view__name">{name}e</div>
+            <div className="view__name">{name}</div>
             <div className="view__price">NT${price}</div>
             <div className="view__box">
               <div className="view__rating">
@@ -173,13 +174,14 @@ const ProductView = ({
     );
   };
 
+  // product不為空(空表示沒有此商品)的情況下renderView()
   return product ? renderView() : '';
 };
 
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
   return {
-    product: state.products[id],
+    product: state.products && state.products[id],
     wishItem: state.wishlist[id],
     cartItem: state.cart[id],
   };

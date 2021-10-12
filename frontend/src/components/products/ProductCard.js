@@ -16,31 +16,32 @@ const ProductCard = ({
 
   const actionItemRef = useRef(null);
 
+  // 判斷是否activate card__action-item 以及 heart button
   useEffect(() => {
-    if (actionItemRef.current) {
-      if (!wishItem) {
-        actionItemRef.current.classList.remove('active');
-        actionItemRef.current
-          .querySelector('.btn--heart')
-          .classList.remove('active');
-      } else {
-        actionItemRef.current.classList.add('active');
-        actionItemRef.current
-          .querySelector('.btn--heart')
-          .classList.add('active');
-      }
+    // 因為此component的product是從parent那裏拿來的,所以不需要把product加入dependency
+    if (!actionItemRef.current) return;
+    if (!wishItem) {
+      actionItemRef.current.classList.remove('active');
+      actionItemRef.current
+        .querySelector('.btn--heart')
+        .classList.remove('active');
+    } else {
+      actionItemRef.current.classList.add('active');
+      actionItemRef.current
+        .querySelector('.btn--heart')
+        .classList.add('active');
     }
   }, [wishItem]);
 
+  // 點擊card前往productView
   const onCardClick = () => {
     history.push(`/products/${_id}`);
   };
 
+  // 點擊heart button 加入或移除至wishlist
   const onWishlistIconClick = e => {
     e.stopPropagation();
-    if (!wishItem) {
-      return addProductToWishlist(product);
-    }
+    if (!wishItem) return addProductToWishlist(product);
 
     removeProductFromWishlist(_id);
   };

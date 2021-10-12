@@ -1,9 +1,12 @@
+// show cart items in checkout
+
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import CheckoutCartItem from './CheckoutCartItem';
 
 const CheckoutCart = ({ cart, itemAmount, orderTotal }) => {
+  // 點擊h2顯示或收起CheckoutCart內容
   const [toggle, setToggle] = useState(false);
 
   const renderCartItems = () => {
