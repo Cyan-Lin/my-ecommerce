@@ -14,4 +14,24 @@
 ## 使用的工具
 
 * 前端
-    * aaa
+    * ReactJS, React-router-dom
+    * Redux
+        * Redux-Thunk
+        * Redux-Form
+    * Axios
+    * SCSS
+    * React Stripe.js
+
+* 後端
+    * Express
+    * Mongoose
+    * Passport
+    * Cookie-Session
+    * Stripe
+
+* 資料庫
+    * MongoDB
+
+* 網站部署
+    * Heroku
+
