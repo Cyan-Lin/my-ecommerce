@@ -1,1 +1,1 @@
-web: my-ecommerce
+web: npm start
